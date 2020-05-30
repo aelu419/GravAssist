@@ -1,9 +1,9 @@
 import os
+
 import sys
+sys.path.insert(0, '../src')
 
 root_dir = os.path.dirname(sys.executable)
-
-#from PySide2.QtWidgets import *
 
 from PySide2.QtGui import *
 from PySide2.QtWidgets import *
@@ -27,9 +27,9 @@ import numpy as np
 
 import src.visualizeGL as vis
 
-import subprocess
+#import subprocess
 #output = subprocess.check_output(["ping", "-c","2", "-W","2", "1.1.1.1"])
-subprocess.call(["echo", "app started"])
+#subprocess.call(["cmd","echo", "app started"])
 
 vis.root_directory = root_dir
 
@@ -202,7 +202,7 @@ class MainWindow(QMainWindow):
         vis.defaultConfig()
         self.stacked.setCurrentWidget(self.splitter)
 
-        self.splitter.graphWidget.resizeGL(self.splitter.graphWidget.frameGeometry().width()*2, self.splitter.graphWidget.frameGeometry().height()*2)
+        self.splitter.graphWidget.resizeGL(self.splitter.graphWidget.frameGeometry().width(), self.splitter.graphWidget.frameGeometry().height())
 
 
     def usePlayer(self):
@@ -218,7 +218,7 @@ class MainWindow(QMainWindow):
             self.player.reset()
             self.player.notifyChange()
             self.stacked.setCurrentWidget(self.player)
-            self.player.graphWidget.resizeGL(self.player.graphWidget.frameGeometry().width()*2, self.player.graphWidget.frameGeometry().height()*2)
+            self.player.graphWidget.resizeGL(self.player.graphWidget.frameGeometry().width(), self.player.graphWidget.frameGeometry().height())
 
 class cntrView(QSplitter):
 
@@ -826,6 +826,7 @@ class glWidget(QGLWidget):
         self.setMinimumSize(640, 480)
         self.makeCurrent()
         self.initted = False
+        glutInit()
         self.initializeGL()
         self.solution = None
 
@@ -913,7 +914,7 @@ class glWidget(QGLWidget):
         global ephem
 
         if not self.initted:
-            vis.init(1024, 720)
+            vis.init()
             for i in vis.planets:
                 vis.planets[i].body = ephem.get_body(i)
         self.initted = True

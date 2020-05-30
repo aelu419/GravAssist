@@ -2,27 +2,22 @@
 
 block_cipher = None
 
+
 a = Analysis(['app.py'],
-             pathex=['/Users/labohem/Desktop/work/python/qt'],
-             binaries=[('/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/spiceypy/utils/spice.so','.'),
-             #('/System/Library/Frameworks/Tk.framework/Tk','Tk'),
-             #('/System/Library/Frameworks/Tcl.framework/Tcl','Tcl')
-             ],
-             datas=[("assets/*",'assets'),
-             ("extracted/*","kernels")],
-             hiddenimports=['pkg_resources.py2_warn','spiceypy','scipy','numpy'],
+             pathex=['E:\\pybuilds\\qtwin'],
+             binaries=[('C:\\Python38\\Lib\\site-packages\\spiceypy\\utils\\cspice.dll','spiceypy\\utils')],
+             datas=[("assets/*",'assets'),("extracted/*","kernels")],
+             hiddenimports=[],
              hookspath=[],
              runtime_hooks=[],
              excludes=['FixTk', 'tcl', 'tk', '_tkinter', 'tkinter', 'Tkinter', 'cryptography',
-             'etc','matplotlib','notebook','PyQt5','Pyside2.Network','PyQt4','QtWebSockets'],
+             'etc','matplotlib','notebook','PyQt5'],
              win_no_prefer_redirects=False,
              win_private_assemblies=False,
              cipher=block_cipher,
              noarchive=False)
-
 pyz = PYZ(a.pure, a.zipped_data,
              cipher=block_cipher)
-
 exe = EXE(pyz,
           a.scripts,
           [],
@@ -32,9 +27,8 @@ exe = EXE(pyz,
           bootloader_ignore_signals=False,
           strip=False,
           upx=True,
-          icon = 'logo.icns',
-          console=True )
-
+          console=True,
+		  icon='app.ico')
 coll = COLLECT(exe,
                a.binaries,
                a.zipfiles,

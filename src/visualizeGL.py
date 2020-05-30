@@ -1,12 +1,15 @@
 from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
+
 import numpy as np
 import time
 
 from PIL import Image as Image
 import sys
 import math
+
+import numpy as np
 
 IS_PERSPECTIVE = True                             # 透视投影
 WIN_W, WIN_H = 640, 480                                 # 保存窗口宽度和高度的变量
@@ -671,7 +674,7 @@ def draw(drawables = []):
     glDisable(GL_TEXTURE_2D)
 
     # ---------------------------------------------------------------
-    glutSwapBuffers()                    # 切换缓冲区，以显示绘制内容
+    #glutSwapBuffers()                    # 切换缓冲区，以显示绘制内容
 
 def sphere(quad, r, color, mat, pos = None):
     #glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, color)
@@ -689,7 +692,7 @@ def reshape(width, height):
     global WIN_W, WIN_H
 
     WIN_W, WIN_H = width, height
-    glutPostRedisplay()
+    #glutPostRedisplay()
 
 def autoChase(posProbe):
     #maintain the current camera angles while following the movement of the probe
@@ -788,7 +791,7 @@ def mousemotion(x, y):
         EYE = LOOK_AT + lookTo
         DIST, PHI, THETA = getposture()
 
-        glutPostRedisplay()
+        #glutPostRedisplay()
 
     elif LEFT_IS_DOWNED:
         dx = MOUSE_X - x
@@ -811,7 +814,7 @@ def mousemotion(x, y):
         else:
             EYE_UP[1] = 1.0
 
-        glutPostRedisplay()
+        #glutPostRedisplay()
 
 def keydown(key, x, y):
     global DIST, PHI, THETA
@@ -861,7 +864,7 @@ def keydown(key, x, y):
 
     DIST, PHI, THETA = getposture()
     #print(DIST, PHI, THETA)
-    glutPostRedisplay()
+    #glutPostRedisplay()
 
 
 #部分参考： https://blog.csdn.net/xufive/article/details/86565130
